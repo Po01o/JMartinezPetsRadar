@@ -1,4 +1,5 @@
 //import { IncidentType } from "src/core/enums/incident-type.enum";
+import { LostPet } from "src/core/db/entities/lost-pet.entity";
 import { PetSpecies } from "src/core/enums/pet-species.enum";
 import { FoundPetCDto } from "src/core/interfaces/found-pet.interface";
 import { generateMapboxImage } from "src/core/utils/utils";
@@ -16,8 +17,8 @@ const petSpeciesLabels: Record<PetSpecies, { label: string; color: string; icon:
     [PetSpecies.FROG]: { label: "Rana", color: "#5aff78", icon: "🐸" }
 };
  
-export const generateFoundPetEmailTemplate = (foundPet: FoundPetCDto): string => {
-    const imageUrl = generateMapboxImage(foundPet.lat, foundPet.lon);
+export const generateFoundPetEmailTemplate = (foundPet: FoundPetCDto, lostPets: LostPet[]): string => {
+    const imageUrl = generateMapboxImage(foundPet.lat, foundPet.lon, lostPets);
     const speciesInfo = petSpeciesLabels[foundPet.species] ?? { label: "Desconocido", color: "#000000" };
     const date = new Date().toLocaleDateString("es-MX", { year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" });
     const foundDate = new Date(foundPet.found_date).toLocaleDateString('es-MX', {

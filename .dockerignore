@@ -3,7 +3,5 @@ node_modules
 .git
 .env
 *.md
-*.rest
-requests
 .Dockerfile
 compose.yaml
